@@ -6,6 +6,9 @@
 
 volatile static int started = 0;
 
+// Declare the semaphore initialization function.
+extern void semaphore_init_all(void);
+
 // start() jumps here in supervisor mode on all CPUs.
 void
 main()
@@ -16,10 +19,12 @@ main()
     printf("\n");
     printf("xv6 kernel is booting\n");
     printf("\n");
+
     kinit();         // physical page allocator
     kvminit();       // create kernel page table
     kvminithart();   // turn on paging
     procinit();      // process table
+    semaphore_init_all(); // Initialize semaphore array
     trapinit();      // trap vectors
     trapinithart();  // install kernel trap vector
     plicinit();      // set up interrupt controller
