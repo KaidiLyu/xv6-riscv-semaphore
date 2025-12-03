@@ -120,6 +120,72 @@ See the original xv6 distribution and documentation at:
 
 ---
 
+## AI Tool Usage and Tips
+
+This project was developed with the assistance of AI tools (ChatGPT EDU and Cursor AI). Below are tips used during development, categorized by type.
+
+### Environment Setup and Installation
+
+1. **macOS RISC-V Toolchain Installation**
+
+- "I'm using macOS, please provide more instructions on how to install the riscv64-unknown-elf toolchain."
+
+2. **Xcode Command Line Tools**
+
+- "brew install gcc reports an error, requiring Xcode command line tools, what should I do?"
+
+### Build System and Makefile Issues
+
+3. **Makefile Syntax Errors**
+
+- "Why does running make result in the error 'Command started before the first target'?"
+
+- "Why does make qemu always fail? What could be the cause?"
+
+- "Why does make indicate a missing delimiter?"
+
+4. **File Paths and Locations**
+
+- "Why can't exec run sleep.c?" Where should it be placed? - Why can't semtest execute? I've already added it to the Makefile.
+
+### System Usage
+
+5. **QEMU and Shell Navigation**
+
+- How do I exit the xv6 shell? How do I return to the macOS terminal?
+
+### Code Implementation and Debugging
+
+6. **System Call Implementation**
+
+- Which files need to be modified to add system calls?
+
+- Why is sys_sleep being defined again? How should the code in syscall.c and sysproc.c be split?
+
+- Why is there a "fetchstr/fetchaddr duplicate definition" error?
+
+- Why is syscalls[] out of scope? How should it be numbered?
+
+- Should sem_init/sem_wait/sem_post/sem_free be placed in syscall.c or sysproc.c?
+
+7. **Semaphore Implementation**
+
+- Why does semtest display "unknown"? Is this a system call?
+
+- Why does `semaphore_wait` use a `while` loop? How should `sleep` and `wakeup` work correctly together?
+
+- How to implement a properly blocking `semaphore_wait` in xv6?
+
+8. **Program Output and Behavior**
+
+- Why does `semtest` output garbled characters? Is there a problem with the `printf` function or the user program?
+
+- Why is the output order of `prodcons` inconsistent? Is this normal?
+
+9. **Producer-Consumer Implementation**
+
+- How should `prodcons.c` be written? How to implement a producer-consumer relationship using two semaphores?
+
 ## Author
 
 **Kaidi Lyu, Sessoms Carson**
