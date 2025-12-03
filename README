@@ -10,7 +10,7 @@ This customized version extends the base xv6 with **semaphore synchronization pr
 
 ## New Features in This Project
 
-### 🧩 Semaphore System Calls
+### Semaphore System Calls
 
 Newly implemented system calls for process synchronization:
 
@@ -116,12 +116,12 @@ xv6 is based on the work of:
 * MIT CSAIL PDOS group: Russ Cox, Frans Kaashoek, and Robert Morris
 
 See the original xv6 distribution and documentation at:
-👉 [https://pdos.csail.mit.edu/6.1810/](https://pdos.csail.mit.edu/6.1810/)
+[https://pdos.csail.mit.edu/6.1810/](https://pdos.csail.mit.edu/6.1810/)
 
 ---
 
 ## Author
 
-**Kaidi Lyu**
+**Kaidi Lyu, Sessoms, Carson**
 University of South Carolina
 *Operating Systems Project — xv6 Semaphore Extension*
