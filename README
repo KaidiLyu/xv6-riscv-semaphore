@@ -120,9 +120,9 @@ See the original xv6 distribution and documentation at:
 
 ---
 
-## AI Tool Usage and Tips
+## AI Prompts
 
-This project was developed with the assistance of AI tools (ChatGPT). Below are tips used during development, categorized by type.
+This project was developed with the assistance of the AI ​​tool (ChatGPT). Below are the prompts actually used during development, organized by category.
 
 ### Environment Setup and Installation
 
@@ -138,15 +138,17 @@ This project was developed with the assistance of AI tools (ChatGPT). Below are 
 
 3. **Makefile Syntax Errors**
 
-- "Why does running make result in the error 'Command started before the first target'?"
+- "Why does running make result in the error 'command started before the first target'?"
 
-- "Why does make qemu always fail? What could be the cause?"
+- "Why does make qemu always fail? What are the possible reasons?"
 
 - "Why does make indicate a missing delimiter?"
 
 4. **File Paths and Locations**
 
-- "Why can't exec run sleep.c?" Where should it be placed? - Why can't semtest execute? I've already added it to the Makefile.
+- "Why can't exec run sleep.c?" Where should it be placed?
+
+- Why can't semtest execute? I've already added it to the Makefile.
 
 ### System Usage
 
@@ -185,6 +187,8 @@ This project was developed with the assistance of AI tools (ChatGPT). Below are 
 9. **Producer-Consumer Implementation**
 
 - How should `prodcons.c` be written? How to implement a producer-consumer relationship using two semaphores?
+
+---
 
 ## Author
 
