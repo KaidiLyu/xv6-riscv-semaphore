@@ -180,52 +180,52 @@ See the original xv6 distribution and documentation at:
 
 ## AI Tool Usage and Prompts
 
-This project was developed with assistance from AI tools (ChatGPT EDU and Cursor AI). Below are the actual prompts used during development, organized by category.
+This project was developed with assistance from AI tools (ChatGPT). Below are the actual prompts used during development, organized by category.
 
 ### Environment Setup and Installation
 
 1. **macOS RISC-V Toolchain Installation**
-   - "我用的是 macOS，重新指导我怎么安装 riscv64-unknown-elf 工具链。"
+   - "I'm using macOS, please guide me on how to install the riscv64-unknown-elf toolchain."
 
 2. **Xcode Command Line Tools**
-   - "brew install gcc 报错需要 Xcode Command Line Tools，该怎么办？"
+   - "brew install gcc failed, it requires Xcode Command Line Tools. What should I do?"
 
 ### Build System and Makefile Issues
 
 3. **Makefile Syntax Errors**
-   - "为什么我运行 make 报错 'commands commence before first target'？"
-   - "为什么 make qemu 总是失败？可能原因有哪些"
-   - "为什么 make 会提示 missing separator？"
+   - "Why do I get 'commands commence before first target' error when running make?"
+   - "Why does make qemu always fail? What are the possible causes?"
+   - "Why does make report 'missing separator' error?"
 
 4. **File Path and Location**
-   - "为什么 exec 运行 sleep 失败？sleep.c 应该放在哪？"
-   - "为什么 semtest 无法执行？我已经加进 Makefile 了。"
+   - "Why does exec fail when running sleep? Where should sleep.c be placed?"
+   - "Why can't semtest execute? I've already added it to Makefile."
 
 ### System Usage
 
 5. **QEMU and Shell Navigation**
-   - "我怎么退出 xv6 shell？怎么回到 macOS 终端？"
+   - "How do I exit xv6 shell? How do I return to macOS terminal?"
 
 ### Code Implementation and Debugging
 
 6. **System Call Implementation**
-   - "添加系统调用需要修改哪些文件？请一步步告诉我。"
-   - "为什么 sys_sleep 重复定义？syscall.c 和 sysproc.c 代码应该如何拆分？"
-   - "为什么出现 multiple definition of fetchstr / fetchaddr 错误？"
-   - "为什么 syscalls[] 会越界？编号应该怎么安排？"
-   - "sem_init / sem_wait / sem_post / sem_free 放在 syscall.c 还是 sysproc.c？"
+   - "Which files need to be modified to add a system call? Please tell me step by step."
+   - "Why is sys_sleep defined multiple times? How should code be split between syscall.c and sysproc.c?"
+   - "Why do I get 'multiple definition of fetchstr / fetchaddr' errors?"
+   - "Why does syscalls[] go out of bounds? How should the numbering be arranged?"
+   - "Should sem_init / sem_wait / sem_post / sem_free go in syscall.c or sysproc.c?"
 
 7. **Semaphore Implementation**
-   - "为什么 semtest 显示 unknown sys call？"
-   - "为什么 semaphore_wait 要用 while 循环？sleep 和 wakeup 如何正确配合？"
-   - "如何在 xv6 中实现一个正确阻塞的 semaphore_wait？"
+   - "Why does semtest show 'unknown sys call'?"
+   - "Why does semaphore_wait need a while loop? How do sleep and wakeup work together correctly?"
+   - "How to implement a correctly blocking semaphore_wait in xv6?"
 
 8. **Program Output and Behavior**
-   - "为什么 semtest 输出乱码？是不是 printf 或用户程序有问题？"
-   - "为什么 prodcons 输出顺序不固定？这是正常的吗？"
+   - "Why is semtest output garbled? Is there a problem with printf or the user program?"
+   - "Why is prodcons output order not fixed? Is this normal?"
 
 9. **Producer-Consumer Implementation**
-   - "prodcons.c 应该怎么写？如何使用两个信号量实现生产者消费者？"
+   - "How should prodcons.c be written? How to use two semaphores to implement producer-consumer?"
 
 
 
