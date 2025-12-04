@@ -2,15 +2,46 @@
 
 ## Overview
 
-xv6 is a modern re-implementation of Dennis Ritchie and Ken Thompson's **Unix Version 6 (v6)**. It follows the original structure and design philosophy of v6 but is re-written in **ANSI C** for the **RISC-V multiprocessor architecture**. xv6 is widely used as an educational operating system in MIT’s 6.1810 Operating Systems course.
+**xv6 is a complete, working command-line operating system** for RISC-V computers. It is a modern re-implementation of Dennis Ritchie and Ken Thompson's **Unix Version 6 (v6)**. It follows the original structure and design philosophy of v6 but is re-written in **ANSI C** for the **RISC-V multiprocessor architecture**. xv6 is widely used as an educational operating system in MIT's 6.1810 Operating Systems course.
 
-This customized version extends the base xv6 with **semaphore synchronization primitives** and includes demonstration programs to verify inter-process communication and synchronization.
+### Complete Operating System Features
+
+This project provides a **fully functional command-line operating system** with the following core components:
+
+#### 🖥️ **Command-Line Shell**
+- Interactive shell (`sh.c`) with command parsing
+- Supports command execution, redirection (`>`, `<`), and pipelines (`|`)
+- Built-in commands: `cd`, `ls`, `cat`, `echo`, `grep`, `mkdir`, `rm`, `kill`, `sleep`, etc.
+
+#### 📁 **File System**
+- Complete inode-based file system with journaling
+- Supports regular files, directories, and device files
+- File operations: create, read, write, delete, link, unlink
+- Directory navigation and management
+
+#### 🔄 **Process Management**
+- Multi-process support with `fork()`, `exec()`, `wait()`, `exit()`
+- Round-robin scheduling across multiple CPU cores
+- Process synchronization and inter-process communication
+
+#### 💾 **Memory Management**
+- RISC-V Sv39 paging with virtual memory
+- Separate kernel and user address spaces
+- Page allocation and management
+
+#### 🔧 **System Calls**
+- Complete system call interface (20+ system calls)
+- User-kernel mode switching via RISC-V `ecall` instruction
+- System calls for file operations, process management, and synchronization
+
+#### 🆕 **New Feature: Semaphore Synchronization**
+This customized version **extends** the base xv6 with **semaphore synchronization primitives** and includes demonstration programs to verify inter-process communication and synchronization.
 
 ---
 
 ## New Features in This Project
 
-### Semaphore System Calls
+### 🧩 Semaphore System Calls
 
 Newly implemented system calls for process synchronization:
 
@@ -99,12 +130,39 @@ make qemu TOOLPREFIX=riscv64-unknown-elf-
 
 ### 4. Inside xv6 Shell
 
-To run demo programs:
+Once xv6 boots, you'll see the command prompt `$`. This is a **fully functional command-line operating system**. You can use standard Unix commands:
 
+**Basic Commands:**
 ```bash
-$ semtest
-$ prodcons
+$ ls              # List files
+$ cat README      # Display file contents
+$ echo hello      # Print text
+$ mkdir test      # Create directory
+$ rm file         # Delete file
+$ grep pattern file  # Search in files
 ```
+
+**Run Multiple Programs:**
+```bash
+$ sleep 10 &      # Run in background
+$ forktest        # Test fork functionality
+```
+
+**Use Shell Features:**
+```bash
+$ echo hello | grep hello    # Pipeline
+$ ls > output.txt            # Redirection
+$ cat file1 file2            # Multiple arguments
+```
+
+**Test Semaphore Features (New):**
+```bash
+$ semtest         # Test semaphore synchronization
+$ prodcons        # Test producer-consumer problem
+```
+
+**Exit the Shell:**
+Press `Ctrl+A` then `X` to exit QEMU (xv6 shell doesn't have built-in `exit` command)
 
 ---
 
@@ -116,82 +174,80 @@ xv6 is based on the work of:
 * MIT CSAIL PDOS group: Russ Cox, Frans Kaashoek, and Robert Morris
 
 See the original xv6 distribution and documentation at:
-[https://pdos.csail.mit.edu/6.1810/](https://pdos.csail.mit.edu/6.1810/)
+👉 [https://pdos.csail.mit.edu/6.1810/](https://pdos.csail.mit.edu/6.1810/)
 
 ---
 
-## AI Prompts
+## AI Tool Usage and Prompts
 
-This project was developed with the assistance of the AI ​​tool (ChatGPT). Below are the prompts actually used during development, organized by category.
+This project was developed with assistance from AI tools (ChatGPT EDU and Cursor AI). Below are the actual prompts used during development, organized by category.
 
 ### Environment Setup and Installation
 
 1. **macOS RISC-V Toolchain Installation**
-
-- "I'm using macOS, please provide more instructions on how to install the riscv64-unknown-elf toolchain."
+   - "我用的是 macOS，重新指导我怎么安装 riscv64-unknown-elf 工具链。"
 
 2. **Xcode Command Line Tools**
-
-- "brew install gcc reports an error, requiring Xcode command line tools, what should I do?"
+   - "brew install gcc 报错需要 Xcode Command Line Tools，该怎么办？"
 
 ### Build System and Makefile Issues
 
 3. **Makefile Syntax Errors**
+   - "为什么我运行 make 报错 'commands commence before first target'？"
+   - "为什么 make qemu 总是失败？可能原因有哪些"
+   - "为什么 make 会提示 missing separator？"
 
-- "Why does running make result in the error 'command started before the first target'?"
-
-- "Why does make qemu always fail? What are the possible reasons?"
-
-- "Why does make indicate a missing delimiter?"
-
-4. **File Paths and Locations**
-
-- "Why can't exec run sleep.c?" Where should it be placed?
-
-- Why can't semtest execute? I've already added it to the Makefile.
+4. **File Path and Location**
+   - "为什么 exec 运行 sleep 失败？sleep.c 应该放在哪？"
+   - "为什么 semtest 无法执行？我已经加进 Makefile 了。"
 
 ### System Usage
 
 5. **QEMU and Shell Navigation**
-
-- How do I exit the xv6 shell? How do I return to the macOS terminal?
+   - "我怎么退出 xv6 shell？怎么回到 macOS 终端？"
 
 ### Code Implementation and Debugging
 
 6. **System Call Implementation**
-
-- Which files need to be modified to add system calls?
-
-- Why is sys_sleep being defined again? How should the code in syscall.c and sysproc.c be split?
-
-- Why is there a "fetchstr/fetchaddr duplicate definition" error?
-
-- Why is syscalls[] out of scope? How should it be numbered?
-
-- Should sem_init/sem_wait/sem_post/sem_free be placed in syscall.c or sysproc.c?
+   - "添加系统调用需要修改哪些文件？请一步步告诉我。"
+   - "为什么 sys_sleep 重复定义？syscall.c 和 sysproc.c 代码应该如何拆分？"
+   - "为什么出现 multiple definition of fetchstr / fetchaddr 错误？"
+   - "为什么 syscalls[] 会越界？编号应该怎么安排？"
+   - "sem_init / sem_wait / sem_post / sem_free 放在 syscall.c 还是 sysproc.c？"
 
 7. **Semaphore Implementation**
-
-- Why does semtest display "unknown"? Is this a system call?
-
-- Why does `semaphore_wait` use a `while` loop? How should `sleep` and `wakeup` work correctly together?
-
-- How to implement a properly blocking `semaphore_wait` in xv6?
+   - "为什么 semtest 显示 unknown sys call？"
+   - "为什么 semaphore_wait 要用 while 循环？sleep 和 wakeup 如何正确配合？"
+   - "如何在 xv6 中实现一个正确阻塞的 semaphore_wait？"
 
 8. **Program Output and Behavior**
-
-- Why does `semtest` output garbled characters? Is there a problem with the `printf` function or the user program?
-
-- Why is the output order of `prodcons` inconsistent? Is this normal?
+   - "为什么 semtest 输出乱码？是不是 printf 或用户程序有问题？"
+   - "为什么 prodcons 输出顺序不固定？这是正常的吗？"
 
 9. **Producer-Consumer Implementation**
+   - "prodcons.c 应该怎么写？如何使用两个信号量实现生产者消费者？"
 
-- How should `prodcons.c` be written? How to implement a producer-consumer relationship using two semaphores?
+
+
+
+
+
+## Notes on AI Assistance
+
+- AI tools were used primarily for:
+  - Troubleshooting build and compilation errors
+  - Understanding xv6 system call mechanism
+  - Implementing semaphore synchronization primitives
+  - Debugging Makefile syntax issues
+  - Writing documentation
+
+- All code was tested and verified independently after AI assistance
+- Understanding of the code was achieved through studying xv6 source code and documentation
 
 ---
 
 ## Author
 
-**Kaidi Lyu, Sessoms Carson**
+**Kaidi Lyu**
 University of South Carolina
 *Operating Systems Project — xv6 Semaphore Extension*
