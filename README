@@ -239,7 +239,6 @@ This project was developed with assistance from AI tools (ChatGPT). Below are th
   - Understanding xv6 system call mechanism
   - Implementing semaphore synchronization primitives
   - Debugging Makefile syntax issues
-  - Writing documentation
 
 - All code was tested and verified independently after AI assistance
 - Understanding of the code was achieved through studying xv6 source code and documentation
@@ -248,6 +247,6 @@ This project was developed with assistance from AI tools (ChatGPT). Below are th
 
 ## Author
 
-**Kaidi Lyu**
+**Kaidi Lyu, Sessoms Carson**
 University of South Carolina
 *Operating Systems Project — xv6 Semaphore Extension*
