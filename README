@@ -227,8 +227,9 @@ This project was developed with assistance from AI tools (ChatGPT). Below are th
 9. **Producer-Consumer Implementation**
    - "How should prodcons.c be written? How to use two semaphores to implement producer-consumer?"
 
-
-
+10. ** Links to Carsons GPT prompts **
+   -https://chatgpt.com/share/e/6930ca82-1e3c-8001-9352-693c23b16e12
+   -there we some more but the link wont load, they mostly had to do with updating my qemu to 7.2 or higher so i could get my program to run on WSL because thats a common issue appareantly.
 
 
 
