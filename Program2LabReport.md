@@ -27,8 +27,8 @@ Implemented a complete semaphore synchronization mechanism, including four syste
 
 - **System Call Interface** (`kernel/sysproc.c`): Implements the user-space to kernel-space interface
   - `sys_sem_init()`: Creates and initializes a semaphore
-  - `sys_sem_wait()`: Wait (P operation), blocks if value <= 0
-  - `sys_sem_post()`: Signal (V operation), increments the counter and wakes up waiting processes
+  - `sys_sem_wait()`: Wait (P operation),used to request access to resources and decrements semaphore value by 1, blocks if value <= 0
+  - `sys_sem_post()`: Signal (V operation), increments the counter and wakes up waiting processes, realeasing access to the resource
   - `sys_sem_free()`: Releases semaphore resources
 
 - **System Call Registration** (`kernel/syscall.c`): Registers new calls in the system call table
@@ -61,8 +61,8 @@ Implemented a round-robin scheduling mechanism for multiple processes, supportin
   - Each process contains: PID, state, page table, trapframe, context, etc.
 
 **AI Tool Assistance:**
-- Understood xv6's scheduling mechanism and process state transitions
-- Learned RISC-V context switching assembly implementation
+- Helped with understanding xv6's scheduling mechanism and process state transitions
+- Helped to learn RISC-V context switching assembly implementation
 
 #### Feature 3: System Call Mechanism
 
@@ -87,8 +87,8 @@ Implemented a complete system call interface where user programs request kernel 
   - `argstr()`: Gets string parameters (requires copying from user space)
 
 **AI Tool Assistance:**
-- Understood RISC-V system call parameter passing conventions (a0-a5 registers)
-- Learned xv6's system call dispatch mechanism
+- Helped with understanding RISC-V system call parameter passing conventions (a0-a5 registers)
+- Hekped learn xv6's system call dispatch mechanism
 
 #### Feature 4: Memory Management and Virtual Memory
 
@@ -110,8 +110,8 @@ Implemented RISC-V Sv39 paging mechanism, providing independent virtual address 
   - `pagetable`: User page table pointer
 
 **AI Tool Assistance:**
-- Understood RISC-V Sv39 paging mechanism
-- Learned xv6's memory management architecture
+- Helped to understand RISC-V Sv39 paging mechanism
+- Helped learn xv6's memory management architecture
 
 #### Feature 5: File System
 
@@ -130,8 +130,8 @@ Implemented an inode-based journaling file system supporting file creation, read
   - Supports crash recovery
 
 **AI Tool Assistance:**
-- Understood xv6 file system hierarchy
-- Learned journaling file system principles
+- Helped to understand xv6 file system hierarchy
+- Helped in learning journaling file system principles
 
 ### 1.2 Failed Attempts & Learning
 
@@ -147,12 +147,12 @@ Initially, when implementing `semaphore_wait()`, we incorrectly used an `if` sta
 
 **Failure Reason:**
 - How `sleep()` and `wakeup()` work: `wakeup()` wakes up all processes sleeping on the specified channel
-- If using `if` instead of `while`, awakened processes may find the condition still unsatisfied (because other processes may have already acquired the semaphore)
+- Since we were using `if` instead of `while`, awakened processes may find the condition still unsatisfied (because other processes may have already acquired the semaphore)
 - This violates semaphore semantics and may allow multiple processes to enter the critical section simultaneously
 
 **Knowledge Gained:**
 - Understood the cooperation mechanism of `sleep()` and `wakeup()` in xv6
-- Learned to use `while` loops with condition checks to implement correct blocking synchronization
+- Learned to use `while` loops with condition checks to implement correct blocking synchronization, as opposed to `for` loops
 - Understood the importance of spinlocks in protecting shared data structures
 
 **Final Solution:**
@@ -173,7 +173,7 @@ When adding semaphore system calls, the system call number definitions and `sysc
 
 **Evidence (from development process):**
 - Compilation errors related to array bounds
-- README records the related conversation: "Why does syscalls[] go out of bounds? How should the numbering be arranged?"
+- README records to the related conversation: "Why does syscalls[] go out of bounds? How should the numbering be arranged?"
 
 **Failure Reason:**
 - System call numbers are defined in `syscall.h` (23-26), but the `syscalls[]` array requires continuous indexing
@@ -182,12 +182,12 @@ When adding semaphore system calls, the system call number definitions and `sysc
 
 **Knowledge Gained:**
 - Understood xv6's system call table organization: uses array indices to directly map system call numbers
-- Learned how to correctly add new system calls: need to modify `syscall.h`, `syscall.c`, `sysproc.c`, and user-space interface simultaneously
+- Learned how to correctly add new system calls: needed to modify `syscall.h`, `syscall.c`, `sysproc.c`, and user-space interface simultaneously
 - Understood that system call numbers must be continuous and correspond to array indices
 
 **Final Solution:**
 - Ensure system call numbers are defined continuously starting from 23
-- Add handler functions in order to the `syscalls[]` array
+- Added handler functions to the `syscalls[]` array in order
 - Use `[SYS_sem_init]` syntax to ensure correct indexing
 
 #### Failed Attempt 3: Makefile Build Issues
@@ -198,22 +198,22 @@ When adding new user programs (`semtest`, `prodcons`), Makefile configuration wa
 **Evidence (from development process):**
 - README records the related conversation: "Why can't semtest execute? I've already added it to Makefile."
 - Initially, incorrect Makefile configuration caused programs to fail to compile or execute
-- Need to modify multiple Makefile variables simultaneously (`UPROGS`, compilation rules, etc.)
+- Needed to modify multiple Makefile variables simultaneously (`UPROGS`, compilation rules, etc.)
 
 **Failure Reason:**
 - Makefile needs to add source files to both compilation list and executable list
-- Need to ensure programs are correctly linked to user-space libraries
+- Needed to ensure programs are correctly linked to user-space libraries
 - File paths or naming may not match
 
 **Knowledge Gained:**
-- Understood xv6's build system: need to modify multiple Makefile variables simultaneously
+- Understood xv6's build system: needed to modify multiple Makefile variables simultaneously
 - Learned how to correctly add new user programs to xv6 system
 - Understood the compilation and linking process of user programs
 
 **Final Solution:**
-- Add new programs to the `UPROGS` variable in Makefile
-- Ensure source files are in the correct location (`user/` directory)
-- Use correct naming conventions
+- Added new programs to the `UPROGS` variable in Makefile
+- Ensured source files were in the correct location (`user/` directory)
+- Used correct naming conventions
 
 ### 1.3 Verification of Success
 
